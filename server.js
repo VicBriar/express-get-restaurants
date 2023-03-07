@@ -7,9 +7,9 @@ const port = 3000;
 
 
 //TOFIX: Create your GET Request Route Below: 
-app.get("/restaurants", async (request, response) => {
-    let restaurants = await Restaurant.findAll();
-    response.send(restaurants)
+app.get("/restaurants/:id", async (request, response) => {
+    let restaurant = await Restaurant.findByPk(request.params.id);
+    response.json(restaurant)
 })
 
 app.listen(port, () => {
