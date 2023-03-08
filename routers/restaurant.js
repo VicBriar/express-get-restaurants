@@ -20,6 +20,7 @@ router.post(
     '/',
     [
         check("name").not().isEmpty().trim().withMessage("name cannot be empty"),
+        check("name").isLength({min: 10, max: 30}).withMessage("name must be between 10 & 30 characters"),
         check("location").not().isEmpty().trim().withMessage("location cannot be empty"),
         check("cuisine").not().isEmpty().trim().withMessage("cuisine cannot be empty")
     ],
