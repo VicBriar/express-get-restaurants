@@ -29,6 +29,23 @@ app.post('/restaurants', async (request,response) => {
     }
 })
 
+app.put('/restaurants/:id', async (request,response) => {
+    try{
+        let id = request.params.id
+        let newRestaurant = request.body
+        let restaurant = await Restaurant.findByPk(id)
+        if(restaurant){
+            restaurant.update(newRestaurant)
+            response.status(200).send("restaurant updated")
+            console.log("restaurant updated")
+        } else {
+            console.log("restaurant not found");
+        }   
+    }catch (err) {
+        console.log(err)
+    }
+})
+
 app.listen(port, () => {
     sequelize.sync();
     console.log(`your server is listening at HTTP://localhost:${port}`);
