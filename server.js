@@ -46,6 +46,23 @@ app.put('/restaurants/:id', async (request,response) => {
     }
 })
 
+app.delete('/restaurants/:id', async (request,response) =>{
+    try{
+        let id = request.params.id;
+        let restaurant = await Restaurant.findByPk(id);
+        if(restaurant){
+            await restaurant.destroy()
+            response.status(200).send("restaurant destroyed")
+            console.log("restaurant destroyed")
+        }else{
+            response.status(500).send("restaurant not found")
+            console.log("restaurant not found")
+        }
+    }catch (err) {
+        console.error(err);
+    }
+})
+
 app.listen(port, () => {
     sequelize.sync();
     console.log(`your server is listening at HTTP://localhost:${port}`);
