@@ -2,7 +2,6 @@ const express = require("express");
 const app = express();
 const {Restaurant} = require("./models/index")
 const {sequelize} = require("./db");
-const { Musician } = require("../../Database/musicians-bands/Models/Musician");
 
 const port = 3000;
 
@@ -23,8 +22,8 @@ app.get("/restaurants/:id", async (request, response) => {
 app.post('/restaurants', async (request,response) => {
     try {
         let restaurant = request.body;
-        await Musician.create(restaurant)
-        response.send("Musician added!")
+        await Restaurant.create(restaurant)
+        response.send("restaurant added!")
     }catch(err){
         console.log(err)
     }
